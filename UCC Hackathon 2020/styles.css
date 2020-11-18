@@ -1,0 +1,128 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #010D1A;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+/* Hides scrollbar when page is minimized */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* Navigation Box */
+#navbox {
+    height: 65px;
+    background-color: #2D4662;
+}
+
+/* Logo */
+#navbox > p {
+    float: left;
+    margin: 0;
+    padding: 14px 0 0 2em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: white;
+    font-weight: 700;
+}
+
+/* Links */
+nav {
+    float: left;
+}
+
+@media screen and (max-width: 700px) {
+    #navbox {
+        display: none;
+    }
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    padding: 1.4em 0 0 0;
+    margin-left: 3em;
+}
+
+nav a {
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: white;
+}
+
+nav a:hover {
+    color: #EFE44D;
+    text-decoration: underline;
+}
+
+/* Create Button */
+#createbutton {
+    float: right;
+    margin: 1em 2em 0 0;
+    padding: 5px 20px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: white;
+    background-color: #7EE141;
+}
+
+#createbutton:hover {
+    background-color: #57B31E;
+    cursor: pointer;
+}
+
+/* Homepage Background Image */
+#homepgpic {
+    width: 100%;
+    z-index: -1;
+    opacity: 0.04;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Homepage Body Content */
+.contentbox {
+    margin: 0;
+    padding: 2em;
+    height: 30vh;
+    width: 40vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(141,142,142,0.2);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+    line-height: 25px;
+    overflow-y: scroll;
+}
+
+.contentbox span {
+    text-decoration: underline;
+}
+
+.startprompt {
+    text-decoration: none;
+    color: #5BCCFF;
+}
+
+.startprompt:hover {
+    color: #2190C3;
+    text-decoration: underline;
+}
