@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./cardstyles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="./Images/Memo.ico">
+    <title>Create Custom Flashcards | ReCall</title>
+</head>
+<body>
+
+    <header>
+        <!-- Navigation Bar -->
+            <div id="navbox">
+
+                <!-- Logo -->
+                <p>ReCall</p>
+
+                <!-- Navigation Links -->
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./contacts.html">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        
+    </header>
+
+    <main>
+        <!-- Flashcards by codefoxx: https://www.youtube.com/watch?v=twQEnJHThNE&ab_channel=codefoxx  
+            
+        ***DISCLAIMER*** The javascript code is not ours as we have not learned how to program with this language yet, the CSS inside "cardstyles.css" was also from the video but it was modified greatly to fit the website's appearance -->
+        
+        <!-- Title & Add Card box -->
+        <div class="main-container">
+            <div class="container-1">
+                <h1>Flashcard Generator</h1>
+                <button onclick="showContainer2()" class="btn btn-outline-dark">Add Card</button>
+            </div>
+        
+        <!-- Flashcard Generator  -->
+        <div class="container-2">
+            <form>
+                <label for="text">(visible)</label>
+
+                    <!-- Hide Button X -->
+                    <svg onclick="hideContainer2()" width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg><br>
+
+                <!-- Question Box -->
+                <textarea id="question"></textarea>
+            </form>
+                
+            <form>
+                <!-- Answer Box -->
+                <label for="text">(hidden)</label><br>
+                <textarea id="answer"></textarea>
+            </form>
+            
+            <!-- Save Button -->
+            <button onclick="saveFlashcard()" class="btn btn-outline-dark savebutton">Save</button>
+        </div>
+        
+        <!-- Placeholder for new flashcards -->
+        <div class="container-3"></div>
+    </main>
+
+    <!-- JavaScript link-->
+    <script src="cards.js"></script>
+</body>
+</html>
