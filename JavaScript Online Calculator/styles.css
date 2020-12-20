@@ -1,0 +1,116 @@
+:root {
+    --buttons: #F0A626;
+    --buttons-hover: #dd961c;
+    --characters: #FFF;
+}
+
+::-webkit-scrollbar {
+    height: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: -moz-radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eeaeca",endColorstr="#94bbe9",GradientType=1);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator-box {
+    content: "";
+    height: 400px;
+    width: 300px;
+    background-color: #495154;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 2em 1em 1em;
+    border-radius: 10px;
+}
+
+.display {
+    grid-row: 1;
+    content: "";
+    height: 4em;
+    width: 100%;
+    background-color: #FFF;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: scroll;
+}
+
+#calc-display {
+    margin-left: 15px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #9E9E9E;
+}
+
+.calculator-keys {
+    grid-row: 2;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+.calculator-keys tr td button {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    border-color: rgba(0,0,0,0.2);
+    border-width: 1px;
+    background-color: var(--buttons);
+    color: var(--characters);
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.calculator-keys tr td button:focus {
+    outline: none;
+}
+
+.calculator-keys tr td button:hover {
+    background-color: var(--buttons-hover);
+}
+
+.calculator-keys tr td button:active {
+    transform: scale(0.9);
+}
+
+#reset {
+    background-color: #FA5D23;
+}
+
+#reset:hover {
+    background-color: #CC4816;
+}
+
+#backspace {
+    background-color: red;
+}
+
+#backspace:hover {
+    background-color: #D10000;
+}
+
+#equals-btn {
+    background-color: #03B000;
+}
+
+#equals-btn:hover {
+    background-color: #018500;
+}
