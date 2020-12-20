@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/abacus.ico">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Online Calculator</title>
+</head>
+<body>
+    <div class="calculator-box">
+        <div class="display">
+            <p id="calc-display"></p>
+        </div>
+
+        <table class="calculator-keys">
+            <tr>
+                <td><button type="button" onclick="userinput('c')" id="reset">C</button></td>
+                <td><button type="button" onclick="userinput('^')">&#9192;</button></td>
+                <td><button type="button" onclick="userinput('%')">&percnt;</button></td>
+                <td><button type="button" onclick="userinput('/')">&divide;</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="userinput('1')">1</button></td>
+                <td><button type="button" onclick="userinput('2')">2</button></td>
+                <td><button type="button" onclick="userinput('3')">3</button></td>
+                <td><button type="button" onclick="userinput('*')">&times;</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="userinput('4')">4</button></td>
+                <td><button type="button" onclick="userinput('5')">5</button></td>
+                <td><button type="button" onclick="userinput('6')">6</button></td>
+                <td><button type="button" onclick="userinput('+')">&plus;</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="userinput('7')">7</button></td>
+                <td><button type="button" onclick="userinput('8')">8</button></td>
+                <td><button type="button" onclick="userinput('9')">9</button></td>
+                <td><button type="button" onclick="userinput('-')">&minus;</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="userinput('del')" id="backspace">del</button></td>
+                <td><button type="button" onclick="userinput('0')">0</button></td>
+                <td><button type="button" onclick="userinput('.')">.</button></td>
+                <td><button type="button" onclick="userinput('ans')" id="equals-btn">&equals;</button></td>
+            </tr>
+        </table>
+        
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
