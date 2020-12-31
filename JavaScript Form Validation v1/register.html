@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Create an account</title>
+</head>
+<body>
+    <form action="/" method="POST">
+        <section>
+            <h1>Sign up</h1>
+            <label for="username">Username</label>
+            <input type="text" placeholder="Enter a valid username" name="username">
+            
+            <label for="password">Password</label>
+            <input type="password" placeholder="Enter a password" name="password">
+
+            <ul>
+                <li>
+                    <a href="/login">Already have an account?</a>
+                </li>
+            </ul>
+
+            <button type="submit" onclick="createAccount()">Create account</button>
+        </section>
+    </form>
+    
+    <script src="./app.js"></script>
+</body>
+</html>
