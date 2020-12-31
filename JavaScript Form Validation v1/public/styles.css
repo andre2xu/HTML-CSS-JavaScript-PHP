@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 400px;
+    width: 350px;
+    background-color: #B6B7B8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1em;
+}
+
+form section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: fit-content;
+}
+
+form section h1 {
+    margin: 0 auto 1.5em;
+    padding: 2px;
+    text-align: center;
+    width: 9ch;
+    text-transform: uppercase;
+    color: #FFF;
+    background-color:  #F23A3A;
+}
+
+form section label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+form section > input {
+    margin-bottom: 2em;
+}
+
+form section input {
+    border-color: transparent;
+    height: 28px;
+}
+
+form section input:focus {
+    outline: none;
+}
+
+form button {
+    margin: 2em 0 2em;
+    height: 40px;
+    border-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:focus {
+    outline: none;
+}
+
+form button:hover {
+    background-color: #F23A3A;
+    color: #FFF;
+}
+
+form button:active {
+    transform: scale(0.95);
+}
+
+form section ul {
+    list-style: none;
+    font-size: 14px;
+}
+
+form section ul > li {
+    margin-bottom: 5px;
+}
+
+form section ul li a {
+    text-decoration: none;
+    color: #348AC7;
+}
+
+form section ul li a:hover {
+    text-decoration: underline;
+    color: #246491;
+}
