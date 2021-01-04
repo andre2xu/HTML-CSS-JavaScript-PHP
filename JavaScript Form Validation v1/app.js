@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const mydb = require('./database');
+const bcrypt = require('bcrypt');
 
 // routes
 const loginRoute = require('./routes/login.js');
@@ -20,20 +21,27 @@ app.use('/register', registerRoute);
 
 // --- THIS IS FOR REGISTER PAGE ---
 app.post('/', (req, res) => {
-    // SQL queries
-    var $query1 = 'INSERT INTO accounts (username, password) VALUES ("'+ req.body.username +'", "'+ req.body.password +'")';
+    // password hashing
+    saltRounds = 10;
 
-    mydb.query($query1, (err, rows, fields) => {
-        if (err) {
-            console.log("Query execution failed due to...", err);
-        }
+    bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+        if (err) throw err;
 
-        console.log("Successful query execution.");
-        res.redirect('/login');
-    });
+        // SQL queries
+        var $query1 = 'INSERT INTO accounts (username, password) VALUES ("'+ req.body.username +'", "'+ hash +'")';
 
-    // closes database connection after query execution
-    mydb.end();
+        mydb.query($query1, (err, rows, fields) => {
+            if (err) {
+                console.log("Query execution failed due to...", err);
+            }
+
+            console.log("Successful query execution.");
+            res.redirect('/login');
+        });
+
+        // closes database connection after query execution
+        mydb.end();
+    })
 })
 
 // --- THIS IS FOR LOGIN PAGE ---
@@ -41,29 +49,28 @@ app.get('/', (req, res) => {
     var user = req.query.username;
     var pass = req.query.password;
 
-    // SQL queries
     var $query2 = 'SELECT username, password FROM accounts';
 
     mydb.query($query2, (err, result) => {
         if (err) throw err;
 
-        for (let i = 0; i < result.length; i++) {
-            if (user == result[i].username && pass == result[i].password) {
-                console.log("Succesfully logged in.");
-                res.redirect('/login');
-                break;
-            } else if (user != result[i].username && pass != result[i].password) {
-                console.log("Rechecking...");
-                continue;
-            } else {
-                console.log("Invalid username or password, try again.");
-                res.redirect('/login');
-                break;
-            }
-        }
-    })
+        result.forEach((e) => {
+            bcrypt.compare(pass, e.password, (err, result) => {
+                if (err) throw err;
+                
+                // authentication process
+                if (user == e.username && result == true) {
+                    console.log("Successfully logged in!");
+                    res.redirect('/login');
+                } else {
+                    console.log("Rechecking...");
+                }
+            })
+        });
 
-    mydb.end();
+        // closes database connection after authentication
+        mydb.end();
+    })
 })
 
 app.listen(3000, () => {
