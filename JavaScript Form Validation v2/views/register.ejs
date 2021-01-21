@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="logreg.css">
+    <title>Sign up</title>
+</head>
+<body>
+    <nav>
+        <div class="innerbox">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="filter">
+            <form action="/api/user/register" method="POST">
+                <label for="username">Username</label>
+                <div class="f-alert"><%= message %></div>
+                <input type="text" name="username" id="username" placeholder="Enter a valid username">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter a password">
+
+                <a href="/api/user/login">Already have an account?</a>
+
+                <button type="submit">Create account</button>
+            </form>
+        </div>
+    </main>
+    
+    <script src="app.js"></script>
+</body>
+</html>
