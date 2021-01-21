@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="logreg.css">
+    <title>Sign in</title>
+</head>
+<body>
+    <nav>
+        <div class="innerbox">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="filter">
+            <form action="/api/user/login" method="POST">
+                <label for="username">Username</label>
+                <div class="f-alert"><%= message2 %></div>
+                <input type="text" name="username" id="username" placeholder="Username">
+                <label for="password">Password</label>
+                <div class="f-alert"><%= message1 %></div>
+                <input type="password" name="password" id="password" placeholder="Password">
+
+                <a href="#">Forgot your password?</a>
+                <a href="/api/user/register">Don't have an account?</a>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </main>
+    
+    <script src="app.js"></script>
+</body>
+</html>
