@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{url_for('static', filename='favicon.ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <title>Leaderboard</title>
+</head>
+<body id="leaderboard">
+    <audio autoplay loop hidden id="bg-music">
+        <source src="{{url_for('static', filename='trace_route.mp3')}}">
+    </audio>
+
+    <div>
+        <div>
+            <a href="{{url_for('index')}}">Go back</a>
+            <select name="result-filter" id="result-filter">
+                <option selected disabled>Filter by...</option>
+                <option value="kills">Kills</option>
+                <option value="waves_survived">Waves survived</option>
+                <option value="highest_wave">Highest wave</option>
+                <option value="best_time">Best run</option>
+            </select>
+        </div>
+
+        <table id="leaderboard-table">
+            <tr>
+                <th>Place</th>
+                <th>Username</th>
+                <th>Kills</th>
+                <th>Waves Survived</th>
+                <th>Highest Wave</th>
+                <th>Best Highest Wave Run</th>
+            </tr>
+
+            {% for player in leaderboardData %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    {% for data in player %}
+                        <td>{{data}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <script>
+        const filter_options = document.getElementById('result-filter');
+        filter_options.addEventListener('change', (option) => {
+            let choice = option.target.value;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', `/leaderboard?filter=${encodeURIComponent(choice)}`);
+            xhr.send()
+
+            xhr.onload = () => {
+                // this is my own version of JQuery's .load() method which 'reloads' only a specific part of the page
+
+                let parsedDocument = new DOMParser().parseFromString(xhr.responseText, 'text/html');
+                let filteredLeaderboard = parsedDocument.getElementById('leaderboard-table');
+                document.getElementById('leaderboard-table').innerHTML = `${filteredLeaderboard.outerHTML}`;
+            }
+        })
+
+        // plays the background music
+        window.addEventListener('click', () => {
+            let audio_file = document.getElementById('bg-music');
+            audio_file.play();
+            window.removeEventListener('click', () => {});
+        })
+    </script>
+</body>
+</html>
