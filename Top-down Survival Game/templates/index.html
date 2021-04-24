@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{url_for('static', filename='favicon.ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <title>Main Menu</title>
+</head>
+<body id="menu" title="Click anywhere to play background music">
+    <div class="body-wrapper">
+        <audio autoplay loop hidden id="bg-music">
+            <source src="{{url_for('static', filename='trace_route.mp3')}}">
+        </audio>
+
+        <section id="tutorial-section">
+            <h1>How to Play</h1>
+
+            <div class="tutorial box1">
+                <img src="{{url_for('static', filename='tutorial1.gif')}}">
+                <div>
+                    <ul>
+                        <li>W (move up)</li>
+                        <li>A (move left)</li>
+                        <li>S (move down)</li>
+                        <li>D (move right)</li>
+                    </ul>
+
+                    <ul>
+                        <li>^ (shoot up)</li>
+                        <li>< (shoot left)</li>
+                        <li>v (shoot down)</li>
+                        <li>> (shoot right)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tutorial">
+                <img src="{{url_for('static', filename='tutorial2.gif')}}">
+                <p>
+                    You can avoid enemies by moving diagonally, this is done by combining two of the four movement keys listed above.<br><br>From wave 8 onwards, enemies become invulnerable for a short period of time after receiving damage so it is recommended to conserve your bullets and only shoot one at a time.<br><br>Everytime you get hit you gain temporary invincibility which you can use to escape sticky situations.
+                </p>
+            </div>
+        </section>
+
+        <section id="game-section">
+            <div class="forms">
+                {% set emptyUsername = get_flashed_messages(category_filter=['emptyUsername']) %}
+                {% set emptyPassword = get_flashed_messages(category_filter=['emptyPassword']) %}
+                {% set emptyFields = get_flashed_messages(category_filter=['emptyFields'])%}
+                {% set invalidUsername = get_flashed_messages(category_filter=['invalidUsername']) %}
+                {% set invalidCredentials = get_flashed_messages(category_filter=['invalidCredentials']) %}
+
+                <!-- registration -->
+                {% if emptyUsername %}
+                    <p class="error-message">{{ emptyUsername[0] }}</p>
+                {% elif emptyPassword %}
+                    <p class="error-message">{{ emptyPassword[0] }}</p>
+                {% elif emptyFields %}
+                    <p class="error-message">
+                        <span>Submission Failed</span>
+                        {{ emptyFields[0] }}
+                    </p>
+                {% elif invalidUsername %}
+                    <p class="error-message">{{ invalidUsername[0] }}</p>
+                {% elif invalidCredentials %}
+                    <p class="error-message">{{ invalidCredentials[0] }}</p>
+                {% endif %}
+
+                <!-- login form -->
+                <form action="{{url_for('login')}}" method="POST" id="login-form" novalidate autocomplete="off">
+                {{ loginForm.csrf_token(id="csrf_log") }}
+                    <h1>Log in to your account</h1>
+                    <p>
+                        Having an account is completely optional but it allows you to save your in-game stats to the leaderboard.
+                    </p>
+
+                    {{ loginForm.login_username(id="login-username", placeholder="Username") }}
+                    {{ loginForm.login_password(id="login-password", placeholder="Password") }}
+
+                    <p class="form-option">Don't have an account? <span id="sign-up">Sign up</span></p>
+
+                    <button type="submit" form="login-form">Login</button>
+                </form>
+
+                <!-- register form -->
+                <form action="{{url_for('register')}}" method="POST" id="register-form" novalidate autocomplete="off">
+                {{ registerForm.csrf_token(id="csrf_reg") }}
+                    <h1>Create an account</h1>
+
+                    {{ registerForm.register_username(id="register-username", placeholder="Username") }}
+                    {{ registerForm.register_password(id="register-password", placeholder="Password") }}
+
+                    <p class="form-option">Already have an account? <span id="sign-in">Sign in</span></p>
+
+                    <button type="submit" form="register-form">Register</button>
+                </form>
+            </div>
+
+            <div class="game-menu">
+                {% if 'verified_username' in session %}
+                    <a href="{{url_for('game')}}">Start game as {{session['verified_username']}}</a>
+                {% else %}
+                    <a href="{{url_for('game')}}">Start game as guest</a>
+                {% endif %}
+
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+
+                {% if 'verified_username' in session %}
+                    <a href="{{url_for('logout')}}">Play as guest (logout)</a>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const body_tag = document.getElementById('menu');
+        const login_form = document.getElementById('login-form');
+        const register_form = document.getElementById('register-form');
+
+        const sign_up_option = document.getElementById('sign-up');
+        const sign_in_option = document.getElementById('sign-in');
+
+        // swaps the forms
+        sign_up_option.addEventListener('click', () => {
+            login_form.classList.toggle('swap');
+            register_form.classList.toggle('swap');
+
+            document.getElementsByClassName('error-message')[0].remove();
+        })
+
+        sign_in_option.addEventListener('click', () => {
+            register_form.classList.toggle('swap');
+            login_form.classList.toggle('swap');
+
+            document.getElementsByClassName('error-message')[0].remove();
+        })
+
+        // plays the background music
+        window.addEventListener('click', () => {
+            let audio_file = document.getElementById('bg-music');
+            audio_file.play();
+            window.removeEventListener('click', () => {});
+            body_tag.removeAttribute('title');
+        })
+    </script>
+
+    <!-- keeps the forms active for when the failed submission reloads the page (to display error messages) -->
+    {% if invalidSubmissionFlag %}
+        <script>
+            document.getElementById('login-form').classList.toggle('swap');
+            document.getElementById('register-form').classList.toggle('swap');
+        </script>
+    {% endif %}
+</body>
+</html>
