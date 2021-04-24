@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{url_for('static', filename='favicon.ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <title>Game</title>
+</head>
+<body id="game">
+    <div id="results-display">
+        <strong>Game Over. You Died.</strong>
+        <span id="results"></span>
+        <div>
+            <a href="{{url_for('game')}}">Retry</a>
+            <a href="{{url_for('index')}}">Main Menu</a>
+        </div>
+    </div>
+
+    <div class="hud">
+        <!-- the HUD is initiated with these values but they will continuously change throughout the game -->
+        <div id="clock">00:00:00</div>
+        <div>
+            <div id="player-icon"></div>
+            <span id="healthbar">100/100</span>
+
+            <div class="player-ammo"></div>
+            <div class="player-ammo"></div>
+            <div class="player-ammo"></div>
+            <span id="ammo">30/30</span>
+        </div>
+        <div id="wave-counter"></div>
+    </div>
+
+    <canvas>Your browser does not support this content</canvas>
+    <script src="{{url_for('static', filename='game.js')}}"></script>
+</body>
+</html>
